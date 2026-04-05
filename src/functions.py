@@ -44,3 +44,31 @@ def analizar_canciones(playlist):
     segundos_restantes = segundos_totales % 60 #Lo que resta
 
     return minutos_totales, segundos_restantes, max_duracion, min_duracion
+
+def dividir_palabras():
+    ocultas = input("Ingrese las palabras a ocultar")
+    palabras = ocultas.split(",")
+    return palabras
+
+def reemplazar_palabra(texto, palabra):
+    palabra_minuscula = palabra.strip().lower()
+    texto_minuscula = texto.lower()
+    resultado = ""
+    i = 0
+
+    while(i < len(texto)):
+        fragmento = texto_minuscula[i : i + len(palabra_minuscula)]
+        if(fragmento == palabra_minuscula):
+            resultado += "*" * len(palabra_minuscula)
+            i += len(palabra_minuscula)
+        else:
+            resultado += texto[i]
+            i += 1
+    return resultado
+
+def tapar_spoileres(texto, palabras):
+    for palabra in palabras:
+        texto = reemplazar_palabra(texto, palabra)
+    return texto
+
+    
